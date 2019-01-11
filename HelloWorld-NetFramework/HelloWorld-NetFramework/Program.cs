@@ -48,7 +48,54 @@ namespace HelloWorld_NetFramework
                 }
             }
 
+            string result = String.Empty;
+
+            if ( age > favoriteNumberNumerically )
+            {
+                result = "You are old!";
+            }
+            else
+            {
+                result = "Get a better number!";
+            }
+            // ternary or conditional operator - page 67
+            result = age > favoriteNumberNumerically ? "You are old!" : "Get a better number!";
+
+            Console.WriteLine(result);
+
             age += 50.5;
+
+            // don't do this
+            string[] names, ages;
+
+            names = new string[3];
+
+            // use the .Length property on arrays when iterating
+            for ( int index = 0; index < names.Length; index++ )
+            {
+                Console.WriteLine("Enter a name: ");
+                names[index] = Console.ReadLine();
+            }
+
+            ages = new string[] { "10", "20", "30" };
+
+            foreach ( var name in names )
+            {
+                Console.WriteLine(name);
+            }
+
+            var maxAge = int.MinValue;
+
+            foreach ( var someAge in ages )
+            {
+                if ( Convert.ToInt32(someAge) > maxAge )
+                {
+                    maxAge = Convert.ToInt32(someAge);
+                }
+            }
+
+
+
 
             Console.WriteLine(age);
 
