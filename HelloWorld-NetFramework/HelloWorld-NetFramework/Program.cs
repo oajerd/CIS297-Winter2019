@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HelloWorld_NetFramework
 {
+
+    enum DaysOfTheWeek { Sunday, Monday, Tuesday, Wednesday };
+
     class Program
     {
         static void Main(string[] args)
@@ -14,6 +17,8 @@ namespace HelloWorld_NetFramework
 
             Console.WriteLine("Please enter your favorite number");
 
+
+            List<string> otherString = new List<string>();
 
             // user input fun
             var favoriteNumber = Console.ReadLine();
@@ -34,7 +39,7 @@ namespace HelloWorld_NetFramework
             // you've gone too far with the digit separator
             int bigNumber = 123_4_5_6_789;
 
-            var age = 31.0;
+            var age = GetUsersAge();
 
             // please don't do this
             int a, b, c, d, e, f;
@@ -63,8 +68,6 @@ namespace HelloWorld_NetFramework
 
             Console.WriteLine(result);
 
-            age += 50.5;
-
             // don't do this
             string[] names, ages;
 
@@ -86,20 +89,27 @@ namespace HelloWorld_NetFramework
 
             var maxAge = int.MinValue;
 
-            foreach ( var someAge in ages )
-            {
-                if ( Convert.ToInt32(someAge) > maxAge )
-                {
-                    maxAge = Convert.ToInt32(someAge);
-                }
-            }
+            //foreach ( var someAge in ages )
+            //{
+            //    if ( Convert.ToInt32(someAge) > maxAge )
+            //    {
+            //        maxAge = Convert.ToInt32(someAge);
+            //    }
+            //}
 
 
 
+           
 
             Console.WriteLine(age);
 
             Console.ReadLine();
+        }
+
+        static int GetUsersAge()
+        {
+            Console.WriteLine("Enter your age");
+            return Convert.ToInt32(Console.ReadLine());
         }
     }
 }
