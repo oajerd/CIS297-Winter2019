@@ -12,6 +12,10 @@ namespace HelloWorldWinForms
 {
     public partial class Form1 : Form
     {
+        private static string EMPTY = "Empty";
+        private static string RED = "Red";
+        private static string BLUE = "Blue";
+
         private List<List<PictureBox>> PictureBoxes;
         bool bluesTurn = true;
         bool gameOver = false;
@@ -24,11 +28,11 @@ namespace HelloWorldWinForms
             int x_start = 0;
             int y_start = 40;
 
-            for ( int row = 0; row < 6; row++ )
+            for (int row = 0; row < 6; row++)
             {
                 PictureBoxes.Add(new List<PictureBox>());
                 x_start = 12;
-                for ( int column = 0; column < 7; column++)
+                for (int column = 0; column < 7; column++)
                 {
                     PictureBox pictureBox = new PictureBox();
                     pictureBox.Location = new System.Drawing.Point(x_start, y_start);
@@ -36,7 +40,7 @@ namespace HelloWorldWinForms
                     pictureBox.BorderStyle = BorderStyle.FixedSingle;
                     pictureBox.BackgroundImage = Properties.Resources.Empty;
                     pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
-                    pictureBox.Tag = "Empty";
+                    pictureBox.Tag = EMPTY;
                     ((ISupportInitialize)(pictureBox)).BeginInit();
                     Controls.Add(pictureBox);
 
@@ -86,17 +90,17 @@ namespace HelloWorldWinForms
 
                 for (int row = PictureBoxes.Count - 1; row >= 0; row--)
                 {
-                    if (PictureBoxes[row][column].Tag.ToString() == "Empty")
+                    if (PictureBoxes[row][column].Tag.ToString() == EMPTY)
                     {
                         if (bluesTurn)
                         {
                             PictureBoxes[row][column].BackgroundImage = Properties.Resources.blueChecker;
-                            PictureBoxes[row][column].Tag = "Blue";
+                            PictureBoxes[row][column].Tag = BLUE;
                         }
                         else
                         {
                             PictureBoxes[row][column].BackgroundImage = Properties.Resources.redChecker;
-                            PictureBoxes[row][column].Tag = "Red";
+                            PictureBoxes[row][column].Tag = RED;
                         }
                         bluesTurn = !bluesTurn;
                         break;
@@ -105,7 +109,7 @@ namespace HelloWorldWinForms
 
                 if (whosTurn != bluesTurn)
                 {
-                    if (bluesTurn)
+                    if (!bluesTurn)
                     {
                         whosTurnLabel.Text = "Red's Turn";
                     }
@@ -116,17 +120,44 @@ namespace HelloWorldWinForms
                 }
             }
 
-            if ( gameIsOver() )
+            if (gameIsOver())
             {
                 gameOver = true;
+                if (NoMoreMoves())
+                {
+                    whosTurnLabel.Text = "Draw!";
+                }
+                else if (!bluesTurn)
+                {
+                    whosTurnLabel.Text = "Blue wins!";
+                }
+                else
+                {
+                    whosTurnLabel.Text = "Red wins!";
+                }
             }
-            
-            
+
+
         }
 
         private bool gameIsOver()
         {
-            return WinHorizontal() || WinVertical() || WinDiagonal();
+            return WinHorizontal() || WinVertical() || WinDiagonal() || NoMoreMoves();
+        }
+
+        private bool NoMoreMoves()
+        {
+            foreach (var row in PictureBoxes)
+            {
+                foreach (var column in row)
+                {
+                    if (column.Tag.ToString() == EMPTY)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private bool WinDiagonal()
@@ -136,22 +167,96 @@ namespace HelloWorldWinForms
 
         private bool WindDiagonalDown()
         {
-            throw new NotImplementedException();
+            int columnNumberThatDoesntLeaveEnoughRoomFor4InARow = 4;
+            int rowNumberThatDoesntLeaveEnoughRoomFor4InARow = 3;
+
+            for (int row = 0; row < rowNumberThatDoesntLeaveEnoughRoomFor4InARow; row++)
+            {
+                for (int column = 0; column < columnNumberThatDoesntLeaveEnoughRoomFor4InARow; column++)
+                {
+                    if (PictureBoxes[row][column].Tag.ToString() != EMPTY &&
+                        PictureBoxes[row][column].Tag.ToString() ==
+                        PictureBoxes[row + 1][column + 1].Tag.ToString() &&
+                        PictureBoxes[row + 1][column + 1].Tag.ToString() ==
+                        PictureBoxes[row + 2][column + 2].Tag.ToString() &&
+                        PictureBoxes[row + 2][column + 2].Tag.ToString() ==
+                        PictureBoxes[row + 3][column + 3].Tag.ToString())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private bool WinDiagonalUp()
         {
-            throw new NotImplementedException();
+            int columnNumberThatDoesntLeaveEnoughRoomFor4InARow = 4;
+            int rowNumberThatDoesntLeaveEnoughRoomFor4InARow = 2;
+
+            for (int row = PictureBoxes.Count - 1; row > rowNumberThatDoesntLeaveEnoughRoomFor4InARow; row--)
+            {
+                for (int column = 0; column < columnNumberThatDoesntLeaveEnoughRoomFor4InARow; column++)
+                {
+                    if (PictureBoxes[row][column].Tag.ToString() != EMPTY &&
+                        PictureBoxes[row][column].Tag.ToString() ==
+                        PictureBoxes[row - 1][column + 1].Tag.ToString() &&
+                        PictureBoxes[row - 1][column + 1].Tag.ToString() ==
+                        PictureBoxes[row - 2][column + 2].Tag.ToString() &&
+                        PictureBoxes[row - 2][column + 2].Tag.ToString() ==
+                        PictureBoxes[row - 3][column + 3].Tag.ToString())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private bool WinVertical()
         {
-            throw new NotImplementedException();
+            int rowNumberThatDoesntLeaveEnoughRoomFor4InARow = 3;
+
+            for (int column = 0; column < 7; column++)
+            {
+                for( int row = 0; row < rowNumberThatDoesntLeaveEnoughRoomFor4InARow; row++)
+                {
+                    if ( PictureBoxes[row][column].Tag.ToString() != EMPTY &&
+                        PictureBoxes[row][column].Tag.ToString() ==
+                        PictureBoxes[row + 1][column].Tag.ToString() &&
+                        PictureBoxes[row + 1][column].Tag.ToString() ==
+                        PictureBoxes[row + 2][column].Tag.ToString() &&
+                        PictureBoxes[row + 2][column].Tag.ToString() ==
+                        PictureBoxes[row + 3][column].Tag.ToString() )
+                    {
+                        return true;
+                    } 
+                } 
+            }
+            return false;
         }
 
         private bool WinHorizontal()
         {
-            throw new NotImplementedException();
+            int columnNumberThatDoesntLeaveEnoughRoomFor4InARow = 4;
+
+            for (int row = 0; row < 6; row++)
+            {
+                for (int column = 0; column < columnNumberThatDoesntLeaveEnoughRoomFor4InARow; column++)
+                {
+                    if (PictureBoxes[row][column].Tag.ToString() != EMPTY &&
+                        PictureBoxes[row][column].Tag.ToString() ==
+                        PictureBoxes[row][column + 1].Tag.ToString() &&
+                        PictureBoxes[row][column + 1].Tag.ToString() ==
+                        PictureBoxes[row][column + 2].Tag.ToString() &&
+                        PictureBoxes[row][column + 2].Tag.ToString() ==
+                        PictureBoxes[row][column + 3].Tag.ToString())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
