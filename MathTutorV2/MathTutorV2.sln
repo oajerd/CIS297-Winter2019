@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathTutorV2", "MathTutorV2\MathTutorV2.csproj", "{3C7D7309-FFB3-4638-AD3F-C525EBDAFA53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathTutorV2WinForm", "MathTutorV2WinForm\MathTutorV2WinForm.csproj", "{AA800396-A409-42A1-BD46-C187CB6EF513}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C7D7309-FFB3-4638-AD3F-C525EBDAFA53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7D7309-FFB3-4638-AD3F-C525EBDAFA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7D7309-FFB3-4638-AD3F-C525EBDAFA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7D7309-FFB3-4638-AD3F-C525EBDAFA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA800396-A409-42A1-BD46-C187CB6EF513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA800396-A409-42A1-BD46-C187CB6EF513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA800396-A409-42A1-BD46-C187CB6EF513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA800396-A409-42A1-BD46-C187CB6EF513}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C5B59B2-A29A-40BD-8190-AF9C6CEFC92C}
+	EndGlobalSection
+EndGlobal
