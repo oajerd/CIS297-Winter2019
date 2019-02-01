@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahtzee", "Yahtzee\Yahtzee.csproj", "{7161E4A4-974E-4DF1-8B16-60710ECAF10F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YahtzeeTests", "YahtzeeTests\YahtzeeTests.csproj", "{4CEDBD85-7368-462C-94AA-210685F2D91E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7161E4A4-974E-4DF1-8B16-60710ECAF10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7161E4A4-974E-4DF1-8B16-60710ECAF10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7161E4A4-974E-4DF1-8B16-60710ECAF10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7161E4A4-974E-4DF1-8B16-60710ECAF10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CEDBD85-7368-462C-94AA-210685F2D91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CEDBD85-7368-462C-94AA-210685F2D91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEDBD85-7368-462C-94AA-210685F2D91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CEDBD85-7368-462C-94AA-210685F2D91E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E1AD743-93FC-45BE-8304-F8B429CF7F81}
+	EndGlobalSection
+EndGlobal
