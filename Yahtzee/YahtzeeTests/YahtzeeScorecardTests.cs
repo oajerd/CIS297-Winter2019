@@ -29,6 +29,7 @@ namespace Yahtzee.Tests
 
             // Act
             var scorecard = new YahtzeeScorecard(dice);
+            scorecard.CalculateScores();
 
             // Assert
             Assert.AreEqual(expectedOnesScore, scorecard.Ones);
