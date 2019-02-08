@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yahtzee
 {
-    public class YahtzeeScorecard
+    public class YahtzeeScorecard : IComparable<YahtzeeScorecard>
     {
         static int UPPER_BONUS = 35;
         static int YAHTZEE = 50;
@@ -45,6 +45,7 @@ namespace Yahtzee
             this.dice = dice;
             diceValues = new List<int>();
             faceFrequency = new List<int>();
+            
         }
 
         public void CalculateScores()
@@ -99,6 +100,9 @@ namespace Yahtzee
                 SmallStraight = SMALL_STRAIGHT;
                 LargeStraight = LARGE_STRAIGHT;
             }
+
+            LowerTotal = FullHouse + ThreeOfAKind + FourOfAKind + SmallStraight + LargeStraight + Yahtzee + Chance;
+            GrandTotal = LowerTotal + UpperTotal;
         }
                
 
@@ -136,6 +140,11 @@ namespace Yahtzee
                 }
             }
             return sum;
+        }
+
+        public int CompareTo(YahtzeeScorecard other)
+        {
+            return GrandTotal - other.GrandTotal;
         }
     }
 }
