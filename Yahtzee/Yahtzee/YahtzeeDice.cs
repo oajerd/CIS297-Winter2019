@@ -8,6 +8,8 @@ namespace Yahtzee
 {
     public class YahtzeeDice
     {
+        static int MAX_ROLLS = 3;
+
         private IRandom random;
 
         private int[] diceValues;
@@ -57,6 +59,11 @@ namespace Yahtzee
                 diceValues[4] = random.Next(1, 7);
             }
             RollCount++;
+        }
+
+        public bool CanRollAgain()
+        {
+            return RollCount != MAX_ROLLS;
         }
 
         public int GetDieValue(int dieNumber)

@@ -30,12 +30,6 @@ namespace Yahtzee
         public int Yahtzee { get; set; }
         public int Chance { get; set; }
 
-        public int UpperBonus { get; set; }
-        public int UpperTotal { get; set; }
-        public int LowerTotal { get; set; }
-        public int GrandTotal { get; set; }
-
-
         private YahtzeeDice dice;
         private List<int> diceValues;
         private List<int> faceFrequency;
@@ -45,7 +39,33 @@ namespace Yahtzee
             this.dice = dice;
             diceValues = new List<int>();
             faceFrequency = new List<int>();
-            
+        }
+
+        public int GetUpperBonus()
+        {
+            if (Ones + Twos + Threes + Fours + Fives + Sixes >= 63)
+            {
+                return UPPER_BONUS;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int GetUpperTotal()
+        {
+            return Ones + Twos + Threes + Fours + Fives + Sixes + GetUpperBonus();
+        }
+
+        public int GetLowerTotal()
+        {
+            return FullHouse + ThreeOfAKind + FourOfAKind + SmallStraight + LargeStraight + Yahtzee + Chance;
+        }
+
+        public int GetGrandTotal()
+        {
+            return GetLowerTotal() + GetUpperTotal();
         }
 
         public void CalculateScores()
@@ -57,13 +77,6 @@ namespace Yahtzee
             Fours = sumOfDiceWithFace(4);
             Fives = sumOfDiceWithFace(5);
             Sixes = sumOfDiceWithFace(6);
-
-            if (Ones + Twos + Threes + Fours + Fives + Sixes >= 63)
-            {
-                UpperBonus = UPPER_BONUS;
-            }
-
-            UpperTotal = Ones + Twos + Threes + Fours + Fives + Sixes + UpperBonus;
 
             // full house
             if (faceFrequency.Contains(2) && faceFrequency.Contains(3))
@@ -94,34 +107,26 @@ namespace Yahtzee
                 SmallStraight = SMALL_STRAIGHT;
             }
 
-            if ((diceValues.Contains(1) && diceValues.Contains(2) && diceValues.Contains(3) && diceValues.Contains(4) && diceValues.Contains(5) )
-                || (diceValues.Contains(2) && diceValues.Contains(3) && diceValues.Contains(4) && diceValues.Contains(5) && diceValues.Contains(6)) )
+            if ((diceValues.Contains(1) && diceValues.Contains(2) && diceValues.Contains(3) && diceValues.Contains(4) && diceValues.Contains(5))
+                || (diceValues.Contains(2) && diceValues.Contains(3) && diceValues.Contains(4) && diceValues.Contains(5) && diceValues.Contains(6)))
             {
                 SmallStraight = SMALL_STRAIGHT;
                 LargeStraight = LARGE_STRAIGHT;
             }
 
-            LowerTotal = FullHouse + ThreeOfAKind + FourOfAKind + SmallStraight + LargeStraight + Yahtzee + Chance;
-            GrandTotal = LowerTotal + UpperTotal;
+            Chance = sumOfDice();
         }
-               
 
         private void FillDiceValues()
         {
-            diceValues.Clear();
-            diceValues.Add(dice.GetDieValue(1));
-            diceValues.Add(dice.GetDieValue(2));
-            diceValues.Add(dice.GetDieValue(3));
-            diceValues.Add(dice.GetDieValue(4));
-            diceValues.Add(dice.GetDieValue(5));
+            diceValues = new List<int> { dice.GetDieValue(1), dice.GetDieValue(2),
+                dice.GetDieValue(3), dice.GetDieValue(4), dice.GetDieValue(5) };
 
-            faceFrequency.Clear();
-            faceFrequency.AddRange( new List<int> { 0,0,0,0,0,0,0});
-            foreach( var face in diceValues )
+            faceFrequency = new List<int> { 0, 0, 0, 0, 0, 0, 0 };
+            foreach (var face in diceValues)
             {
                 faceFrequency[face]++;
             }
-
         }
 
         public int sumOfDice()
@@ -132,9 +137,9 @@ namespace Yahtzee
         public int sumOfDiceWithFace(int face)
         {
             var sum = 0;
-            foreach ( var die in diceValues )
+            foreach (var die in diceValues)
             {
-                if ( die == face )
+                if (die == face)
                 {
                     sum += face;
                 }
@@ -144,7 +149,7 @@ namespace Yahtzee
 
         public int CompareTo(YahtzeeScorecard other)
         {
-            return GrandTotal - other.GrandTotal;
+            return GetGrandTotal() - other.GetGrandTotal();
         }
     }
 }
