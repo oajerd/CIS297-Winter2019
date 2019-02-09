@@ -280,5 +280,30 @@ namespace Yahtzee
             scoreChance.Enabled = false;
             NextTurn();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            checkBox1.Checked = !checkBox1.Checked;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            checkBox2.Checked = !checkBox2.Checked;
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            checkBox3.Checked = !checkBox3.Checked;
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            checkBox4.Checked = !checkBox4.Checked;
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            checkBox5.Checked = !checkBox5.Checked;
+        }
     }
 }
