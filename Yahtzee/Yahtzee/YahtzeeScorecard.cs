@@ -30,6 +30,38 @@ namespace Yahtzee
         public int Yahtzee { get; set; }
         public int Chance { get; set; }
 
+        public int UpperBonus
+        {
+            get
+            {
+                return (Ones + Twos + Threes + Fours + Fives + Sixes >= 63) ? UPPER_BONUS : 0;
+            }
+        }
+
+        public int UpperTotal
+        {
+            get
+            {
+                return Ones + Twos + Threes + Fours + Fives + Sixes + UpperBonus;
+            }
+        }
+
+        public int LowerTotal
+        {
+            get
+            {
+                return FullHouse + ThreeOfAKind + FourOfAKind + SmallStraight + LargeStraight + Yahtzee + Chance;
+            }
+        }
+
+        public int GrandTotal
+        {
+            get
+            {
+                return UpperTotal + LowerTotal;
+            }
+        }
+
         private YahtzeeDice dice;
         private List<int> diceValues;
         private List<int> faceFrequency;
